@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/longest-substring-without-repeating-characters/
 
-// V2
-// 在sliding window裡面使用left and right更符合大眾習慣。
+// V3
+// 使用has()增加可讀性，使用!強制斷言減少不必要的判斷。
 function lengthOfLongestSubstring(s: string): number {
     let result = 0;
 
@@ -11,8 +11,7 @@ function lengthOfLongestSubstring(s: string): number {
     for (let right = 0; right < s.length; right++) {
         const currentChar = s[right];
 
-        const charIndex = charMap.get(currentChar);
-        if (charIndex !== undefined && left <= charIndex) { left = charIndex + 1; };
+        if (charMap.has(currentChar) && left <= charMap.get(currentChar)!) { left = charMap.get(currentChar)! + 1; };
 
         charMap.set(currentChar, right);
 
@@ -21,6 +20,28 @@ function lengthOfLongestSubstring(s: string): number {
 
     return result;
 }
+
+// V2
+// 在sliding window裡面使用left and right更符合大眾習慣。
+// function lengthOfLongestSubstring(s: string): number {
+//     let result = 0;
+
+//     let left = 0;
+
+//     const charMap = new Map<string, number>();
+//     for (let right = 0; right < s.length; right++) {
+//         const currentChar = s[right];
+
+//         const charIndex = charMap.get(currentChar);
+//         if (charIndex !== undefined && left <= charIndex) { left = charIndex + 1; };
+
+//         charMap.set(currentChar, right);
+
+//         result = Math.max(right - left + 1, result);
+//     };
+
+//     return result;
+// }
 
 // V1
 // function lengthOfLongestSubstring(s: string): number {
