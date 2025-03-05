@@ -1,5 +1,6 @@
 # my-leet-code
 
 ## How To Start .ts File
-On terminal
+``` bash
 npx tsx ./test.ts
+```
